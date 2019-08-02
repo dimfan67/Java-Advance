@@ -1,0 +1,31 @@
+package advance.InputOutputFilesAndDirectories;
+
+import java.io.*;
+
+public class WriteEveryThirdLine {
+    public static void main(String[] args) throws IOException {
+
+        String resoursceFolder = "d:\\Projects\\resorses\\";
+        String inputPath = resoursceFolder + "input.txt";
+        String outputFile = resoursceFolder + "output.txt";
+       //// BufferedReader reader= new BufferedReader( new InputStreamReader(new FileInputStream( inputPath ) ) )
+        try (  BufferedReader reader = new BufferedReader( new InputStreamReader(System.in) ) ;
+
+        PrintWriter writer = new PrintWriter( new FileOutputStream( outputFile )))
+        {
+
+
+            String line = reader.readLine();
+            while (line !=null && !"".equals( line )) {
+
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
