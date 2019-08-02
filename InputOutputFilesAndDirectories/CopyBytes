@@ -1,0 +1,44 @@
+package advance.InputOutputFilesAndDirectories;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+public class CopyBytes {
+
+
+    public static void main(String[] args) {
+        String resourceFolder = "D:\\Projects\\resorses\\";
+        String inputPath = resourceFolder + "input.txt";
+        String outputPpath = resourceFolder + "output.txt";
+
+
+
+Set<Character> punctuation= new HashSet<>();
+Collections.addAll(punctuation,'.', ',', '!', '?');
+
+        try (FileInputStream fis = new FileInputStream(inputPath);
+             FileOutputStream fos= new FileOutputStream(outputPpath))
+                        {
+                            int oneBite = fis.read();
+            while (oneBite >= 0) {
+
+
+                if(!punctuation.contains((char)oneBite) ){
+
+                    fos.write(oneBite);}
+                oneBite = fis.read();
+            }
+        }
+        catch(IOException e ){
+            e.printStackTrace();
+        }
+
+
+    }
+
+}
