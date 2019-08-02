@@ -1,0 +1,27 @@
+package advance.StringProcessing;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class TestStringProcesing {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner( System.in );
+   /*     String test = "dadadadad\n";
+        //маха нови редове и спесове и табулации
+        System.out.println(test.trim());*/
+   String test = "hahahaaaa";
+        System.out.println(test.startsWith("haha"));
+        System.out.println(test.endsWith( "aa" ));
+
+        /* Извежда стойностите в десетичен формат до като валута, закръгля
+        DecimalFormat df = new DecimalFormat( "#.##" );
+        добавяне на нула
+        DecimalFormat df = new DecimalFormat( "0000.00" );
+        System.out.println(df.format( 2.05045165556 ));
+*/
+
+
+
+    }
+}
