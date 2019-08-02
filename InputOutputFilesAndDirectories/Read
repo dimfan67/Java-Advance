@@ -1,0 +1,36 @@
+package advance.InputOutputFilesAndDirectories;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Read {
+                public static void main(String[] args) {
+                    String resoursesFolder= "D:\\";
+                    String path = resoursesFolder + "input.txt";
+                    FileInputStream fis = null;
+
+                    try{ fis = new FileInputStream(path);
+
+                        int oneBite =fis.read();
+
+                        while (oneBite >= 0){
+
+                           ///// System.out.print(oneBite + " ");
+                            System.out.printf("%s ", Integer.toBinaryString(oneBite) );
+                            oneBite = fis.read();
+                        }
+
+                    }catch(IOException e ){
+                        e.printStackTrace();
+        } finally {
+                        try {
+                            if (fis!=null) {
+                                fis.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+    }
+}
