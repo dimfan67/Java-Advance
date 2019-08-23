@@ -1,0 +1,37 @@
+package advance.SetsAndMaps;
+
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Voina {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner( System.in );
+
+        /*Въвеждаме сва сета на коит ще ги пълнем по начин по който влизат числата*/
+        Set<Integer> firstPlayer = new LinkedHashSet <>(  );
+        Set<Integer> secondPlayer = new LinkedHashSet <>(  );
+        /*създадохме метод като използвахме Ctrl+Alt+M */
+        fillNumbers( scanner, firstPlayer, secondPlayer );
+
+
+        System.out.println();
+
+    }
+
+    private static void fillNumbers(Scanner scanner, Set <Integer> firstPlayer, Set <Integer> secondPlayer) {
+    /* Въвеждаме два масива които ги пълнем с числата като ги сплетним по шпация*/
+        String[] firstPlayerNumbers = scanner.nextLine().split( " " );
+        String[] secondPlayerNumbers = scanner.nextLine().split( " " );
+
+        /*пускаме цикли за да парснем нещата*/
+        for (String firstPlayerNumber : firstPlayerNumbers) {
+            /*добавяме всяко число от първия масив масима в сета по начина по който е влязъл*/
+            firstPlayer.add( Integer.parseInt( firstPlayerNumber ));
+        }
+/*добавяме всяко число от втория масив масима в сета по начина по който е влязъл*/
+        for (String secondPlayerNumber : secondPlayerNumbers) {
+            secondPlayer.add( Integer.parseInt( secondPlayerNumber ) );
+        }
+    }
+}
