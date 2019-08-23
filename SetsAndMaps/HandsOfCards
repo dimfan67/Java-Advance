@@ -1,0 +1,89 @@
+package advance.SetsAndMaps;
+
+import java.util.*;
+import java.util.Map;
+
+public class HandsOfCards {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner( System.in );
+
+
+
+        Map<String,Integer> types= new HashMap (  )
+        {{
+            put("S",4);
+            put("H",3);
+            put("D",2);
+            put("C",1);
+
+        }};
+
+
+        Map<String,Integer> powers = new HashMap (  )
+        {{
+            put("J",11);
+            put("Q",12);
+            put("K",13);
+            put("A",14);
+
+        }};
+
+
+
+        Map<String, Set<String>> players = new LinkedHashMap<>(  );
+
+/*четем докато се появи JOKER*/
+String line;
+while (true)  {
+    if ("JOKER".equals( line = scanner.nextLine())){
+break;
+}
+/*сплит по шпация и две точки за да полечим имената на играчите*/
+String[] tokens =line.split( ":\\s" );
+    String name = tokens[0];
+    /*сплит по запетая и шпация за да полечим картите*/
+    String[] cardTokens= tokens[1].split( ",\\s" );
+
+ /*Създаваме сетче и започваме да го пълним*/
+    Set<String> cards = new HashSet<>(  );
+ Collections.addAll( cards,cardTokens );
+
+ /*въртим играчите и добавяме картите */
+ if (players.containsKey( name )){
+     Set<String>previousCards = players.get( name );
+     previousCards.addAll( cards );
+ }else {
+     players.put( name,cards );
+ }
+    }
+    /* изчисляване стойността на картите  */
+        for (Map.Entry<String, Set<String>> player : players.entrySet()) {
+            int totalCardsStength = 0;
+            for (String card : player.getValue()) {
+String power  = card.substring( 0, card.length() -1 );
+            String type = String.valueOf( card.charAt( card.length()-1 ) );
+/* събираме и печатаме*/
+
+             totalCardsStength +=  computeCardSrength(power, type, types, powers);
+            }
+            System.out.printf("%s: %d%n", player.getKey(), totalCardsStength);
+        }
+        }
+
+    private static int computeCardSrength(String power, String type, Map <String, Integer> types, Map <String, Integer> powers) {
+int resultPower= 0;
+/* ако хвърли грешка му присвояваме стойност от мапа, ако ли не се взема парснатата стойност */
+try {
+    resultPower = Integer.parseInt( power );
+
+} catch (NumberFormatException nfe){
+
+resultPower=powers.get( power );
+
+    }
+    return types.get( type ) * resultPower ;
+
+}
+
+
+}
