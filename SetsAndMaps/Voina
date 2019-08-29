@@ -15,7 +15,45 @@ public class Voina {
         fillNumbers( scanner, firstPlayer, secondPlayer );
 
 
-        System.out.println();
+        for (int i = 0; i < 50 ; i++) {
+ /*да провеля дали единия или другия има 0 елемента */
+            if (firstPlayer.isEmpty()|| secondPlayer.isEmpty()){
+                /*тернарен оператор*/
+                System.out.println(firstPlayer.isEmpty() ? "Second player win!":  "First player win!");
+                return;
+            }
+
+            /* взимаме най- левия елемент и ги махаме*/
+int firstNum= firstPlayer.iterator().next();
+firstPlayer.remove( firstNum );
+int secondNum= secondPlayer.iterator().next();
+secondPlayer.remove( secondNum );
+
+/* сравняване и добавяне на елементите*/
+if (firstNum>secondNum){
+    firstPlayer.add(firstNum);
+    firstPlayer.add( secondNum );
+} else if (secondNum>firstNum){
+    secondPlayer.add( secondNum );
+    secondPlayer.add(firstNum);
+}
+        }
+
+                printResult (firstPlayer,secondPlayer);
+
+
+
+    }
+
+    private static void printResult(Set<Integer> firstPlayer, Set<Integer> secondPlayer) {
+   if(firstPlayer.size()>secondPlayer.size())
+   {
+       System.out.println("First player win!");
+   }else if(secondPlayer.size()>firstPlayer.size()){
+       System.out.println("Second player win!");
+   }
+   else
+       System.out.println("Draw");
 
     }
 
@@ -35,3 +73,4 @@ public class Voina {
         }
     }
 }
+
