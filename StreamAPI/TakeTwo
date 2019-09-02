@@ -1,0 +1,50 @@
+package advance.StreamAPI;
+
+import Test.Array;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+/*  1 четем линия с последователност от цели числа
+    2 намираме уникалните числа, които са между 10<=n<=20
+    3 печатаме първите два уникални елемента, ако няма нито един печатаме (no output)
+ */
+public class TakeTwo {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+
+        String[] input = reader.readLine().split( " " );
+/* първи дълъг вариянта
+        HashSet<Integer> numbers = new LinkedHashSet <>(  );
+
+        for (String e : input) {
+            int num = Integer.parseInt( e );
+            if  (num >=10 && num<=20) {
+                numbers.add( num );
+            }
+            if (numbers.size()==2 ){
+                break;
+            }
+
+        }
+
+        for (Integer number : numbers) {
+            System.out.print(number + " "  );
+
+        }
+        */
+
+    /* втори къс вариянт с Lambda функция*/
+        Arrays.stream( input )
+                .map(x->Integer.parseInt( x )) /*map - променя типя*/
+                .filter( x->x>=10&&x<=20 ) /*филтрира чеслата между 10 и 20*/
+                .distinct() /* премахва повтарящите се числа*/
+                .limit( 2 ) /* огреничава броя на изходните елементи*/
+                .forEach( x-> System.out.print(x+" "  ));
+    }
+}
