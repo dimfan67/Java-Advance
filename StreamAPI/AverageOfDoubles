@@ -1,0 +1,32 @@
+package advance.StreamAPI;
+
+import Test.Array;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.OptionalDouble;
+
+public class AverageOfDoubles {
+    /*
+    1 read a sequence of double numbers
+    2 average of all elements - using the Stream API
+    3 round the output to second digit after tje decimal separator*/
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+        OptionalDouble num = Arrays.stream( reader.readLine().split( " " ) )
+                .filter( x-> !x.isEmpty() )
+              .mapToDouble(Double::parseDouble)
+                .average();
+if (num.isPresent()){
+    System.out.println(num.getAsDouble());
+}else {
+    System.out.println(" No match");
+}
+    }
+
+
+}
