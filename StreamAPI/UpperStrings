@@ -1,0 +1,27 @@
+package advance.StreamAPI;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class UpperStrings {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+
+
+        Arrays.stream( reader.readLine().split( " " ) )
+
+       //това се използва за да премахне спейсове ако има такива
+                .filter( x->x.length()>0 )
+                .map( String::toUpperCase ).forEach( x->System.out.println(x+ " ") );
+
+
+
+    }
+}
+
