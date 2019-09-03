@@ -1,0 +1,64 @@
+package advance.StreamAPI;
+
+
+import javafx.util.Pair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+/* Print all students from group number 2
+Use a Stream query
+Order the students by First Name
+ */
+public class StudentsByGroup {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+
+
+        Map<String, List<Pair<String,String>>> students = new HashMap<>(  );
+
+
+String needGroup = "2";
+
+        String line;
+        while (true) {
+            if ("END".equals( line = reader.readLine() )) {
+                break;
+            }
+            String[] tokens = line.split( "\\s+" );
+
+            String firstName = tokens[0];
+            String secondName = tokens[1];
+            String group = tokens[2];
+
+            Pair<String, String> name = new Pair <>( firstName, secondName );
+
+            List<Pair<String, String>> names = new ArrayList <>(  );
+            if (students.containsKey( group )){
+                names = students.get( group );
+            }
+names.add( name);
+            students.putIfAbsent( group,names );
+                    }
+students.entrySet().stream()
+        .filter(g->g.getKey().equals(needGroup)  )
+        .forEach(g-> g.getValue().stream()
+                .sorted( (s1,s2)-> s1.getKey().compareTo( s2.getKey() ) )
+               // .forEach( System.out::println ));
+                .forEach( s->System.out.print( String.format( "%s %s%n", s.getKey(), s.getValue() ) )) );
+
+
+        }
+
+
+
+    }
+
