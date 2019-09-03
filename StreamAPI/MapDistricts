@@ -1,0 +1,64 @@
+package advance.StreamAPI;
+
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MapDistricts {
+
+    public static void main(String[] args) throws IOException {
+        /*1.Map<String, List<Integer>>-> City ,List of districts population
+2. Filter cities that have less population then given value
+3. Sort cities by population sum DESC
+4. Sort cities districts DESC
+5. Print cities and limit their districts up to 5 entries */
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+      Map<String, List<Integer>> cities = new HashMap <>(  );
+
+      String[] input = reader.readLine().split( " " );
+
+      int populationBound = Integer.parseInt( reader.readLine());
+
+
+        addCitiesToMap( cities, input );
+
+
+        cities.entrySet()
+                .stream()
+                .filter(kv->kv.getValue().stream().reduce( (x,y)-> x+y ).get()> populationBound)
+                .sorted((kv1,kv2) -> {
+                    int kv1Sum= kv1.getValue().stream().reduce( (x,y)->x+y ).get();
+                    int kv2Sum= kv2.getValue().stream().reduce( (x,y)->x+y ).get();
+
+                    return Integer.compare( kv2Sum,kv1Sum );
+                })
+                .forEach( kv-> {
+                    System.out.print(kv.getKey()+" :");
+                    kv.getValue().stream().sorted((x,y)-> Integer.compare( y,x ))
+                            .limit( 5 ).forEach( p-> System.out.println(p+" ") );
+                    System.out.println();
+                } );
+
+
+
+    }
+
+    private static void addCitiesToMap(Map <String, List <Integer>> cities, String[] input) {
+        for (String city : input) {
+            String[]cityArgs = city.split( ":" );
+            String cityName = cityArgs[0];
+            int cityDistrict = Integer.parseInt( cityArgs[1] );
+if (!cities.containsKey( cityName )){
+    cities.put( cityName, new ArrayList<>(  ) );
+}
+cities.get( cityName ).add( cityDistrict );
+
+    }
+    }
+}
