@@ -1,0 +1,60 @@
+package advance.StreamAPI;
+
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class StudentsByGroupWhitClass {
+    public static void main(String[] args) throws IOException {
+        BufferedReader  reader  = new BufferedReader( new InputStreamReader( System.in ) );
+
+        List<Students> students = new ArrayList <>(  );
+
+        String line;
+        while (true) {
+            if ("END".equals( line = reader.readLine() )) {
+                break;
+            }
+            String[] tokens = line.split( "\\s+" );
+
+            String firstName = tokens[0];
+            String secondName = tokens[1];
+            String group = tokens[2];
+
+
+            Students student = new Students( firstName,secondName,group );
+            students.add( student );
+
+    }
+    students.stream()
+            .filter( s->s.getGroup().equals( "2" ))
+            .sorted( (s1, s2 )-> s1.getFirstName().compareTo( s2.getFirstName() ))
+            .forEach(System.out::println );
+    }}
+
+    class  Students {
+String firstName;
+String secondName;
+String group;
+
+        public Students(String firstName, String secondName, String group) {
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.group = group;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getGroup() {
+            return group;
+        }
+    }
+
+
+
