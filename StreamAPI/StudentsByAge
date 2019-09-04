@@ -1,0 +1,65 @@
+package advance.StreamAPI;
+
+/*Write a Stream query that finds the first name and last name of all students with age between 18 and
+24. The query should return the first name, last name and age. Print them in order of appearance.
+  правим задачата с класове
+ */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StudentsByAge {
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+
+        List <StudentsAge> students=new ArrayList <>(  );
+        int minAge=18;
+        int maxAge=24;
+
+        String line;
+        while (true) {
+            if ("END".equals( line = reader.readLine() )) {
+                break;
+            }
+            String[] tokens = line.split( "\\s+" );
+
+            String firstName = tokens[0];
+            String secondName = tokens[1];
+            int age = Integer.parseInt( tokens[2] );
+
+
+            StudentsAge student = new StudentsAge( firstName, secondName, age );
+            students.add( student );
+        }
+
+        students.stream()
+                .filter(s->s.getAge() >=minAge && s.getAge()<=maxAge )
+                .forEach( System.out::println );
+
+    }
+}
+
+        class  StudentsAge {
+            private String firstName;
+            private String secondName;
+           private int age;
+
+            public StudentsAge (String firstName, String secondName, Integer age) {
+                this.firstName = firstName;
+                this.secondName = secondName;
+                this.age = age;
+            }
+public int getAge() {
+    return age;
+}
+
+            @Override
+            public String toString() {
+                return String.format("%s %s %d",this.firstName, this.secondName, this.age  );
+            }
+}
