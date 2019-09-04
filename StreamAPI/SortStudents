@@ -1,0 +1,64 @@
+package advance.StreamAPI;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+/*
+Using the lambda expressions with Stream query syntax sort the students first by last name in ascending
+order and then by first name in descending order.
+ */
+public class SortStudents {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader reader  = new BufferedReader( new InputStreamReader( System.in ) );
+
+        List <Students4> students = new ArrayList<>(  );
+
+        String line;
+        while (true) {
+            if ("END".equals( line = reader.readLine() )) {
+                break;
+            }
+            String[] tokens = line.split( "\\s+" );
+
+            String firstName = tokens[0];
+            String secondName = tokens[1];
+
+
+
+            Students4 student = new Students4( firstName, secondName );
+            students.add( student );
+
+        }
+        students.stream()
+                .sorted( (s1, s2 )-> s1.getFirstName().compareTo( s2.getFirstName() ))
+                .forEach(System.out::println ); /*показва референциите*/
+    }}
+
+class  Students4 {
+    String firstName;
+    String secondName;
+
+
+    public Students4(String firstName, String secondName) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return String.format("%s %s",this.firstName, this.secondName  );
+
+
+    }
+}
