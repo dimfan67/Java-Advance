@@ -1,0 +1,79 @@
+package advance.StreamAPI;
+/*
+crCreate a new class StudentSpecialty that holds specialty name and faculty number. Create a Student
+class that holds student name and faculty number. Create a list of student specialties, where each
+specialty corresponds to a certain student (via the faculty number). Print all student names
+alphabetically along with their faculty number and specialty name.
+
+Input Output
+Web Developer 203314
+Web Developer 203114
+PHP Developer 203814
+PHP Developer 203914
+QA Engineer 203314
+Web Developer 203914
+Students:
+215314 Milena Kirova
+203114 Stefan Popov
+203314 Asya Manova
+203914 Diana Petrova
+Asya Manova 203314 Web Developer
+Asya Manova 203314 QA Engineer
+Diana Petrova 203914 PHP Developer
+Diana Petrova 203914 Web Developer
+Ivan Ivanov 203814 PHP Developer
+Stefan Popov 203114 Web Developer
+ */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class StudentsJoinedToSpecialties {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+
+        String line;
+        while (true){
+            if ("Students:".equals( line=reader.readLine() )){
+                break;
+            }
+String[] tokens = line.split( "\\s+" );
+            String specialtyNameFirst = tokens[0];
+            String specialtyNameSecond = tokens[1];
+            String facultyNumber = tokens[2];
+
+            StudentSpecialty studentSpecialty = new StudentSpecialty
+                    (specialtyName:specialtyNameFirst +" "+ specialtyNameSecond, facultyNumber);
+
+        }
+
+            while (true){
+            if ("END".equals( line=reader.readLine() )){
+                break;
+            }
+            String[] tokens = line.split( "\\s+" );
+        }
+
+    }
+
+}
+class StudentSpecialty {
+    String specialtyName;
+    String facultyNumber;
+
+    public StudentSpecialty(String specialtyName, String facultyNumber) {
+        this.specialtyName = specialtyName;
+        this.facultyNumber = facultyNumber;
+    }
+    }
+
+    class Student {
+    String studentName;
+    String facultyNumber;
+
+        public Student(String studentName, String facultyNumber) {
+            this.studentName = studentName;
+            this.facultyNumber = facultyNumber;
+        }
+    }
