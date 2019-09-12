@@ -1,0 +1,52 @@
+package advanced.StreamAPI;
+/*Write a similar program
+to the previous one to extract
+the students with
+at least 2 marks under or
+equal to "3". Use a Stream.
+*/
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.Format;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class WeakStudents {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        Map<String,  String> marksByFacultyNumber = new LinkedHashMap<>(  );
+
+        String line;
+        while(true) {
+            if ("END".equals(line=reader.readLine()) ) {
+                break;
+            }
+            String[] token = line.split("\\s+");
+
+        String firstName = token[0];
+        String lastName =  token [1];
+        List<String>marks = Arrays.stream(token)
+                          .collect(Collectors.toList());
+if( (marks.contains("3")) && (marks.contains("2"))) {
+
+            marksByFacultyNumber
+                            .putIfAbsent( firstName, lastName );
+}
+
+
+
+        }
+
+        marksByFacultyNumber.entrySet().stream()
+             .forEach( m-> System.out.println(
+                        String.format("%s %s ",m.getKey(), m.getValue() ) ));
+
+    }
+}
